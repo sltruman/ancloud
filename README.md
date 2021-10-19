@@ -26,4 +26,6 @@
 ## anbox运行环境
 
 - 采用Linux kernel 5.4，在配置中添加binderfs文件系统支持，在文件`kernel/kallsyms.c`中添加`EXPORT_SYMBOL(kallsyms_lookup_name)`导出符号。
-- 
+- 编译并加载驱动：`binder`，`ashmem`。
+- 创建binderfs文件系统目录：`mkdir /path/to/binderfs && mount -t binder none /path/to/binderfs`
+- 挂载android镜像：`mount -t fuse.squshfuse -o allow_other /path/to/android.img /path/to/rootsfs`
