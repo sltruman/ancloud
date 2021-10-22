@@ -14,6 +14,7 @@
 | |  | anbox-container-manager原理 | | |
 | | | anbox-session-manager原理 | | |
 | | |  | | |
+| | | | | |
 | 前端 |    webrtc学习  |                |      |     周兴邦   |
 |      |               | 本地视频播放示例页面  |   2021.10.24   |        |
 |      |               |  webrtc 实现云播放   |      |        |
@@ -29,3 +30,11 @@
 - 编译并加载驱动：`binder`，`ashmem`。
 - 创建binderfs文件系统目录：`mkdir /path/to/binderfs && mount -t binder none /path/to/binderfs`
 - 挂载android镜像：`mount -t fuse.squshfuse -o allow_other /path/to/android.img /path/to/rootsfs`
+
+## container-manager运行原理
+
+- 创建并监听`/run/anbox-container.socket`或`/var/snap/anbox/common/sockets/anbox-container.socket`。
+- 
+
+## session-manager运行原理
+
