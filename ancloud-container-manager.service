@@ -1,0 +1,10 @@
+[Unit]
+Description=容器管理服务
+
+[Service]
+ExecStart=/home/sl.truman/Desktop/anclud-container-manager.sh
+Restart=on-failure
+WorkingDirectory=/home/sl.truman/Desktop
+
+[Install]
+WantedBy=multi-user.target

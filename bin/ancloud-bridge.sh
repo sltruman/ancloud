@@ -31,29 +31,6 @@ IPV4_NETWORK="192.168.250.1/24"
 IPV4_BROADCAST="0.0.0.0"
 IPV4_NAT="true"
 
-if [ -n "$SNAP" ]; then
-    snap_ipv4_address=$(snapctl get bridge.address)
-    snap_ipv4_netmask=$(snapctl get bridge.netmask)
-    snap_ipv4_network=$(snapctl get bridge.network)
-    snap_ipv4_broadcast=$(snapctl get bridge.broadcast)
-    snap_enable_nat=$(snapctl get bridge.nat.enable)
-    if [ -n "$snap_ipv4_address" ]; then
-        IPV4_ADDR="$snap_ipv4_address"
-    fi
-    if [ -n "$snap_ipv4_netmask" ]; then
-        IPV4_NETMASK="$snap_ipv4_netmask"
-    fi
-    if [ -n "$snap_ipv4_network" ]; then
-        IPV4_NETWORK="$snap_ipv4_network"
-    fi
-    if [ -n "$snap_ipv4_broadcast" ]; then
-        IPV4_BROADCAST="$snap_ipv4_broadcast"
-    fi
-    if [ "$snap_enable_nat" = false ]; then
-        IPV4_NAT="false"
-    fi
-fi
-
 use_iptables_lock="-w"
 iptables -w -L -n > /dev/null 2>&1 || use_iptables_lock=""
 

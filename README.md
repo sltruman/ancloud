@@ -24,17 +24,29 @@
 |      |               |  远程链接            |      |        |
 |      |               |  app开发             |      |        |
 
-## anbox运行环境
+## anbox运行原理
 
 - 采用Linux kernel 5.4，在配置中添加binderfs文件系统支持，在文件`kernel/kallsyms.c`中添加`EXPORT_SYMBOL(kallsyms_lookup_name)`导出符号。
 - 编译并加载驱动：`binder`，`ashmem`。
-- 创建binderfs文件系统目录：`mkdir /path/to/binderfs && mount -t binder none /path/to/binderfs`
-- 挂载android镜像：`mount -t fuse.squshfuse -o allow_other /path/to/android.img /path/to/rootsfs`
+- 44 7824754863 
 
 ## container-manager运行原理
 
-- 创建并监听`/run/anbox-container.socket`或`/var/snap/anbox/common/sockets/anbox-container.socket`。
-- 
+- 创建虚拟网桥`ip link add dev ancloud type bridge`
+- 设置虚拟网桥地址` ip addr add 192.168.240.1/24 dev ancloud`
+- 启用`ip link set dev ancloud up`
+- 启用IP转发`echo 1 > /proc/sys/net/ipv4/ip_forward`
+- 设置虚拟网络NAT👇
+- `iptables -t nat -A POSTROUTING -s 192.168.240.0/24 ! -d 192.168.240.0/24 -j MASQUERADE`
+- `iptables -I INPUT -i ancloud -p udp --dport 67 -j ACCEPT`
+- `iptables -I INPUT -i ancloud -p tcp --dport 67 -j ACCEPT`
+- `iptables -I INPUT -i ancloud -p udp --dport 53 -j ACCEPT`
+- `iptables -I INPUT -i ancloud -p tcp --dport 53 -j ACCEPT`
+- `iptables -I FORWARD -i ancloud -j ACCEPT`
+- `iptables -I FORWARD -o ancloud -j ACCEPT`
+- `iptables -t mangle -A POSTROUTING -o ancloud -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill`
+- 创建binderfs文件系统目录：`mkdir /path/to/binderfs && mount -t binder none /path/to/binderfs`
+- 挂载android镜像：`mount -t fuse.squshfuse -o allow_other /path/to/android.img /path/to/rootsfs`
 
 ## session-manager运行原理
 
