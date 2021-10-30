@@ -27,8 +27,7 @@
 ## anbox运行原理
 
 - 采用Linux kernel 5.4，在配置中添加binderfs文件系统支持，在文件`kernel/kallsyms.c`中添加`EXPORT_SYMBOL(kallsyms_lookup_name)`导出符号。
-- 编译并加载驱动：`binder`，`ashmem`。
-- 44 7824754863 
+- 编译并加载驱动：`binder`，`ashmem`
 
 ## container-manager运行原理
 
@@ -45,8 +44,15 @@
 - `iptables -I FORWARD -i ancloud -j ACCEPT`
 - `iptables -I FORWARD -o ancloud -j ACCEPT`
 - `iptables -t mangle -A POSTROUTING -o ancloud -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill`
-- 创建binderfs文件系统目录：`mkdir /path/to/binderfs && mount -t binder none /path/to/binderfs`
-- 挂载android镜像：`mount -t fuse.squshfuse -o allow_other /path/to/android.img /path/to/rootsfs`
+- 创建binderfs文件系统目录`mkdir /path/to/binderfs && mount -t binder none /path/to/binderfs`
+- 创建数据目录`mkdir /path/to/common`
+- 创建根目录`mkdir /path/to/common/rootfs`
+- 挂载android镜像到根目录`mount -t fuse.squshfuse -o allow_other /path/to/android.img /path/to/common/rootsfs`
+- 创建混合根目录`mkdir /path/to/common/combined-rootfs`
+- 创建可写根目录`mkdir /path/to/common/rootfs-overlay`
+- 合并根目录`mount -t overlay overlay -o lowerdir=/path/to/common/rootfs:/path/to/common/rootfs-overlay /path/to/common/combined-rootfs`
+- 监听套接字地址`/path/to/common/sockets/anbox-container.socket`
+- 等待消息`start_container`,`stop_container`
 
 ## session-manager运行原理
 
