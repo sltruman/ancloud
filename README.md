@@ -13,8 +13,8 @@
 |      |               | iptables学习&使用    |      |        |
 | |  | anbox-container-manager原理 | | |
 | | | anbox-session-manager原理 | | |
-| | |  | | |
-| | | | | |
+| | | dbus学习&使用 | | |
+| | | protobuf学习&使用 | | |
 | 前端 |    webrtc学习  |                |      |     周兴邦   |
 |      |               | 本地视频播放示例页面  |   2021.10.24   |        |
 |      |               |  webrtc 实现云播放   |      |        |
@@ -52,7 +52,9 @@
 - 创建可写根目录`mkdir /path/to/common/rootfs-overlay`
 - 合并根目录`mount -t overlay overlay -o lowerdir=/path/to/common/rootfs:/path/to/common/rootfs-overlay /path/to/common/combined-rootfs`
 - 监听套接字地址`/path/to/common/sockets/anbox-container.socket`
+- 创建容器配置&状态&日志目录`mkdir /path/to/common/containers && mkdir /path/to/common/state && mkdir /path/to/common/logs`
 - 等待消息`start_container`,`stop_container`
+- 创建容器配置文件`/path/to/common/conainers/default/config`并启动容器
 
 ## session-manager运行原理
 
