@@ -1,0 +1,38 @@
+lxc.mount.auto = proc:mixed sys:mixed cgroup:mixed
+lxc.autodev = 1
+lxc.pty.max = 1024
+lxc.tty.max = 0
+lxc.uts.name = anbox
+lxc.environment = PATH=/system/bin:/system/sbin:/system/xbin
+lxc.init.cmd = /anbox-init.sh
+lxc.rootfs.path = /var/snap/anbox/common/rootfs
+lxc.log.level = 0
+lxc.log.file = /var/snap/anbox/common/logs/container.log
+lxc.console.logfile = /var/snap/anbox/common/logs/console.log
+lxc.console.rotate = 1
+lxc.net.0.type = veth
+lxc.net.0.flags = up
+lxc.net.0.link = anbox0
+lxc.apparmor.profile = unconfined
+lxc.idmap = u 0 100000 999
+lxc.idmap = g 0 100000 999
+lxc.idmap = u 1000 1000 1
+lxc.idmap = g 1000 1000 1
+lxc.idmap = u 1001 101001 98999
+lxc.idmap = g 1001 101001 98999
+lxc.mount.entry = /var/snap/anbox/common/binderfs/binder0 /var/snap/anbox/common/rootfs/dev/binder none bind,create=file,optional 0 0
+lxc.mount.entry = /home/sl.truman/snap/anbox/common/runtime/anbox/input /var/snap/anbox/common/rootfs/dev/input none bind,create=dir,optional 0 0
+lxc.mount.entry = /home/sl.truman/snap/anbox/common/runtime/anbox/sockets/anbox_audio /var/snap/anbox/common/rootfs/dev/anbox_audio none bind,create=file,optional 0 0
+lxc.mount.entry = /home/sl.truman/snap/anbox/common/runtime/anbox/sockets/anbox_bridge /var/snap/anbox/common/rootfs/dev/anbox_bridge none bind,create=file,optional 0 0
+lxc.mount.entry = /home/sl.truman/snap/anbox/common/runtime/anbox/sockets/qemu_pipe /var/snap/anbox/common/rootfs/dev/qemu_pipe none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/tun dev/tun none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/urandom dev/urandom none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/tty dev/tty none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/zero dev/zero none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/random dev/random none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/null dev/null none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/fuse dev/fuse none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/console dev/console none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/ashmem dev/ashmem none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/devices/full dev/full none bind,create=file,optional 0 0
+lxc.mount.entry = /var/snap/anbox/common/state/default.prop /var/snap/anbox/common/rootfs/default.prop none bind,optional,ro 0 0
