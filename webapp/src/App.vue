@@ -2,10 +2,6 @@
   <!-- <div id="app">
   </div> -->
   <v-app>
-    <!-- <v-app-bar color="deep-purple" dark>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>Title</v-toolbar-title>
-    </v-app-bar> -->
     <bar />
     <v-main><router-view /> </v-main>
     <v-bottom-navigation>

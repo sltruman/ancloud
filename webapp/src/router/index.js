@@ -9,7 +9,8 @@ export default new Router({
     {
       path: '/',
       name: 'HelloWorld',
-      component: HelloWorld
+      component: HelloWorld,
+      redirect: 'Home',
     },
     {
       path: '/home',
@@ -22,6 +23,12 @@ export default new Router({
       name: 'display',
       // redirect: '/',
       component: () => import('../views/display')
+    },
+    {
+      path: '/account',
+      name: 'account',
+      // redirect: '/',
+      component: () => import('../views/account/account')
     }
   ]
 })
