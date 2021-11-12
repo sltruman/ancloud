@@ -4,17 +4,18 @@
 
 | 项目 | 任务          | 问题                 | 时间 | 人员   |
 | ---- | ------------- | -------------------- | ---- | ------ |
-| 后端 | anbox源码研究 | 编译&运行&原理       |      | 刘楚门 |
-|      |               | LXC学习&使用         |      |        |
+| 后端 | anbox源码研究 | ~~编译&运行&原理~~   |      | 刘楚门 |
+|      |               | ~~LXC学习&使用~~     |      |        |
 |      |               | SDL2学习&使用        |      |        |
 |      |               | 用LXC启动Android镜像 |      |        |
 |      |               | 采集视频流           |      |        |
 |      |               | 中转触控事件         |      |        |
-|      |               | iptables学习&使用    |      |        |
-| |  | anbox-container-manager原理 | | |
+|      |               | ~~iptables学习&使用~~ |      |        |
+| |  | ~~anbox-container-manager原理~~ | | |
 | | | anbox-session-manager原理 | | |
 | | | dbus学习&使用 | | |
 | | | protobuf学习&使用 | | |
+| | | android镜像编译 | | |
 | 前端 |    webrtc学习  |                |      |     周兴邦   |
 |      |               | 本地视频播放示例页面  |   2021.10.24   |        |
 |      |               |  webrtc 实现云播放   |      |        |
@@ -31,6 +32,7 @@
 
 ## container-manager运行原理
 
+- 关闭SELinux`setenforce 0`
 - 创建虚拟网桥`ip link add dev ancloud type bridge`
 - 设置虚拟网桥地址` ip addr add 192.168.240.1/24 dev ancloud`
 - 启用`ip link set dev ancloud up`
@@ -47,7 +49,7 @@
 - 创建binderfs文件系统目录`mkdir /path/to/binderfs && mount -t binder none /path/to/binderfs`
 - 创建数据目录`mkdir /path/to/common`
 - 创建根目录`mkdir /path/to/common/rootfs`
-- 挂载android镜像到根目录`mount -t fuse.squshfuse -o allow_other /path/to/android.img /path/to/common/rootsfs`
+- 挂载android镜像到根目录`mount -t squshfuse -o loop /path/to/android.img /path/to/common/rootsfs`
 - 创建混合根目录`mkdir /path/to/common/combined-rootfs`
 - 创建可写根目录`mkdir /path/to/common/rootfs-overlay`
 - 合并根目录`mount -t overlay overlay -o lowerdir=/path/to/common/rootfs:/path/to/common/rootfs-overlay /path/to/common/combined-rootfs`
@@ -56,5 +58,17 @@
 - 等待消息`start_container`,`stop_container`
 - 创建容器配置文件`/path/to/common/conainers/default/config`并启动容器
 
+一键启动命令`sudo SNAP_COMMON=/home/sl.truman/Desktop/anbox-data anbox container-manager --data-path=/home/sl.truman/Desktop/anbox-data --privileged`
+
 ## session-manager运行原理
 
+- 创建会话套接字目录`mkdir /path/to/common/anbox/sockets`
+- 创建输入设备套接字目录`mkdir /path/to/common/anbox/input`
+- 创建图形平台
+- 创建窗口管理器
+- 创建GL渲染器
+- 监听套接字地址`/path/to/common/anbox/sockets/qemu_pipe`
+- 监听套接字地址`/path/to/common/anbox/sockets/anbox_bridge`
+- 
+
+一键启动命令`SNAP_USER_COMMON=/home/sl.truman/Desktop/anbox-data anbox session-manager --single-window`
