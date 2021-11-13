@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-hidden">
-    <v-app-bar color="deep-purple" dark>
+    <v-app-bar color="deep-purple" dark v-if="true">
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title>示例</v-toolbar-title>
