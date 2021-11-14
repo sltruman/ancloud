@@ -6,29 +6,21 @@
           <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
         </v-avatar>
         <v-list-item-content>
-          <div>
-            <span>1号用户</span>
-          </div>
+          <span class="text-lg-h6">
+            <label class="font-weight-black">用户1</label>
+          </span>
           <v-list-item-title>
             <v-chip label color="orange" text-color="white" x-small>
               会员123
             </v-chip>
           </v-list-item-title>
-
           <v-list-item-title>
-            <v-chip class="ma-2" color="orange" x-small text-color="white">
-              Premium
-              <v-icon right> mdi-star </v-icon>
-            </v-chip>
+            <span class="text-caption">预留...</span>
           </v-list-item-title>
         </v-list-item-content>
 
         <v-row align="center" justify="end">
-          <v-icon class="mr-1"> mdi-heart </v-icon>
-          <span class="subheading mr-2">256</span>
-          <span class="mr-1">·</span>
-          <v-icon class="mr-1"> mdi-share-variant </v-icon>
-          <span class="subheading">45</span>
+          <v-icon class="mr-1" > mdi-account-arrow-right-outline </v-icon>
         </v-row>
       </v-list-item>
     </v-card>
