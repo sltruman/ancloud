@@ -1,8 +1,6 @@
 <template>
   <div>
-    <user />
-
-    <v-card class="mt-1">
+    <v-card>
       <v-list-item class="grow">
         <v-list-item-content>
           <v-list-item-title>
@@ -18,10 +16,8 @@
   </div>
 </template>
 <script>
-import user from "./user.vue";
 export default {
-  components: { user },
-  name: "account",
+  name: "user",
   data() {
     return {
       data: 123,

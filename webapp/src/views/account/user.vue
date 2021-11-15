@@ -19,8 +19,8 @@
           </v-list-item-title>
         </v-list-item-content>
 
-        <v-row align="center" justify="end">
-          <v-icon class="mr-1" > mdi-account-arrow-right-outline </v-icon>
+        <v-row align="center" justify="end" @click="goUserSetting">
+          <v-icon class="mr-1"> mdi-account-arrow-right-outline </v-icon>
         </v-row>
       </v-list-item>
     </v-card>
@@ -35,6 +35,10 @@ export default {
     };
   },
   created() {},
-  methods: {},
+  methods: {
+    goUserSetting() {
+      this.$router.push({ name: "user-setting" });
+    },
+  },
 };
 </script>

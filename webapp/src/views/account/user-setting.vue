@@ -1,27 +1,23 @@
 <template>
   <div>
-    <user />
-
-    <v-card class="mt-1">
+    <v-card>
       <v-list-item class="grow">
         <v-list-item-content>
           <v-list-item-title>
-            <span class="text-caption">设置</span>
+            <span class="text-caption">预留...</span>
           </v-list-item-title>
         </v-list-item-content>
 
         <v-row align="center" justify="end">
-          <v-icon class="mr-1"> mdi-chevron-right </v-icon>
+          <v-icon class="mr-1"> mdi-account-arrow-right-outline </v-icon>
         </v-row>
       </v-list-item>
     </v-card>
   </div>
 </template>
 <script>
-import user from "./user.vue";
 export default {
-  components: { user },
-  name: "account",
+  name: "user",
   data() {
     return {
       data: 123,
