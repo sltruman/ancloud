@@ -1,6 +1,13 @@
 <template>
   <div>
-    <video controls :width="videoWidth" :height="videoHeight" autoplay></video>
+    <v-card style="width: 100%; height: 40%">
+      <video
+        controls
+        :width="videoWidthPQ"
+        :height="videoHeightPQ"
+        autoplay
+      ></video>
+    </v-card>
   </div>
 </template>
 
@@ -9,8 +16,10 @@ export default {
   name: "home",
   data() {
     return {
-      videoWidth: 800,
-      videoHeight: 600,
+      videoWidthPQ: "1920",
+      videoHeightPQ: "1080",
+      videoW: "100%",
+      videoH: "40%",
     };
   },
   created() {
