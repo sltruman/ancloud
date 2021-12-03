@@ -24,6 +24,7 @@ function negotiate () {
 			if (pc.iceGatheringState === 'complete') {
 				resolve();
 			} else {
+				// eslint-disable-next-line no-inner-declarations
 				function checkState () {
 					if (pc.iceGatheringState === 'complete') {
 						pc.removeEventListener('icegatheringstatechange', checkState);
